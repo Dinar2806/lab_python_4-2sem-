@@ -12,7 +12,7 @@ class TaskStatus(Enum):
 
 @dataclass
 class Task:
-    
+    task_type = "default"
     
     id: str = IDDescriptor()
     
