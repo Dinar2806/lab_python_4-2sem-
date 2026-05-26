@@ -14,6 +14,12 @@ class HandlerRegistry:
         self._handlers: Dict[str, TaskHandler] = {}
 
     def register(self, task_type: str, handler: TaskHandler) -> None:
+        if not isinstance(handler, TaskHandler):
+            raise TypeError(
+                f"Объект {type(handler).__name__} не соответствует контракту TaskHandler. "
+                f"должен быть метод 'async def handle(self, task, resource)'."
+            )
+
         self._handlers[task_type] = handler
         logger.info("Зарегистрирован обработчик для типа: %s", task_type)
 

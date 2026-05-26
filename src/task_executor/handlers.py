@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class DataProcessorHandler:
     async def handle(self, task: Task, resource: Any) -> None:
-        logger.info("Обработка данных: %s", task.payload)
+        logger.info("Обработка данных: %s, айди: %s", task.payload, task.id)
         await asyncio.sleep(0.05)
         task.status = TaskStatus.DONE
 

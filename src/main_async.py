@@ -1,4 +1,3 @@
-# main_async.py
 import asyncio
 import logging
 from src.task_collector.collector import TaskCollector
@@ -8,7 +7,7 @@ from src.task_executor.handlers import DataProcessorHandler, NotificationHandler
 
 # Настройка логирования (переопределяем формат для async)
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.DEBUG,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
 logger = logging.getLogger("AsyncApp")
@@ -34,7 +33,7 @@ async def main() -> None:
     registry.register("process", DataProcessorHandler())
     registry.register("notify", NotificationHandler())
     
-    executor = AsyncExecutor(queue=queue, registry=registry, worker_count=3)
+    executor = AsyncExecutor(queue=queue, registry=registry, worker_count=5)
     
     # 3. Запуск
     await executor.start()
